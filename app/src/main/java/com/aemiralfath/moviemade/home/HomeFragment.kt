@@ -1,5 +1,6 @@
 package com.aemiralfath.moviemade.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.aemiralfath.core.data.Resource
 import com.aemiralfath.core.ui.MovieAdapter
 import com.aemiralfath.moviemade.R
 import com.aemiralfath.moviemade.databinding.FragmentHomeBinding
+import com.aemiralfath.moviemade.detail.DetailMovieActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
@@ -34,9 +36,9 @@ class HomeFragment : Fragment() {
 
             val movieAdapter = MovieAdapter()
             movieAdapter.onItemClick = {
-//                val intent = Intent(activity, DetailMovieActivity::class.java)
-//                intent.putExtra(DetailMovieActivity.EXTRA_DATA, it)
-//                startActivity(intent)
+                val intent = Intent(activity, DetailMovieActivity::class.java)
+                intent.putExtra(DetailMovieActivity.EXTRA_DATA, it)
+                startActivity(intent)
             }
 
             homeViewModel.movies.observe(viewLifecycleOwner, {

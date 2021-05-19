@@ -27,4 +27,14 @@
     <string name="sort">Sort</string>
     <string name="sort_title">Sort movie by</string>
     <string name="not_found">Movie not found</string>
+    <string name="overview">Overview</string>
+    <string name="date">date</string>
+    <string name="detail">Detail</string>
+    <string name="share">Share</string>
+    <string name="adult">Adult</string>
+    <string name="language">Language</string>
+    <string name="popularity">Popularity</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="share_movie">Share this movie now</string>
+    <string name="share_text">Watch %s now with me!</string>
 </resources>

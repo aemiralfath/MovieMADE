@@ -2,11 +2,13 @@ package com.aemiralfath.moviemade.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
 import com.aemiralfath.core.domain.model.Movie
 import com.aemiralfath.moviemade.R
 import com.aemiralfath.moviemade.databinding.ActivityDetailMovieBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -32,20 +34,42 @@ class DetailMovieActivity : AppCompatActivity() {
     private fun showDetailMovie(detailMovie: Movie?) {
         detailMovie?.let {
             supportActionBar?.title = detailMovie.title
-            binding.content.tvDetailDescription.text = detailMovie.overview
 
-            Glide.with(this@DetailMovieActivity)
-                .load("https://image.tmdb.org/t/p/w780${detailMovie.backdropPath}")
-                .into(binding.ivDetailImage)
+            with(binding) {
+                Glide.with(this@DetailMovieActivity)
+                    .load("https://image.tmdb.org/t/p/w780${detailMovie.backdropPath}")
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
+                    .into(ivDetailImage)
 
-            var statusFavorite = detailMovie.isFavorite
-            setStatusFavorite(statusFavorite)
+                content.tvOverview.text = detailMovie.overview
 
-            binding.fab.setOnClickListener {
-                statusFavorite = !statusFavorite
-                detailMovieViewModel.setFavoriteMovie(detailMovie, statusFavorite)
+                var statusFavorite = detailMovie.isFavorite
                 setStatusFavorite(statusFavorite)
+
+                fab.setOnClickListener {
+                    statusFavorite = !statusFavorite
+                    detailMovieViewModel.setFavoriteMovie(detailMovie, statusFavorite)
+                    setStatusFavorite(statusFavorite)
+                }
+
+                content.tvMovieAdult.text = if (detailMovie.adult) "Yes" else "No"
+                content.tvMovieLanguage.text = detailMovie.originalLanguage
+                content.tvMoviePopularity.text = detailMovie.popularity.toString()
+                content.tvMovieVote.text = detailMovie.voteCount.toString()
+
+                content.btnMovieShare.setOnClickListener {
+                    ShareCompat.IntentBuilder
+                        .from(this@DetailMovieActivity)
+                        .setType("text/plain")
+                        .setChooserTitle(R.string.share_movie)
+                        .setText(resources.getString(R.string.share_text, detailMovie.title))
+                        .startChooser()
+                }
             }
+
 
         }
     }

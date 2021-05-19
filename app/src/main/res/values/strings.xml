@@ -6,4 +6,6 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="something_wrong">Oops.. something wrong</string>
     <string name="title_activity_detail_home">DetailHomeActivity</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="no_data">Empty data</string>
 </resources>

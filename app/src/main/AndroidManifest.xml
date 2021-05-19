@@ -14,10 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieMade"
         tools:ignore="AllowBackup">
+
         <activity android:name=".detail.DetailMovieActivity"
             android:label="@string/title_activity_detail_home"
             android:theme="@style/Theme.MovieMade.NoActionBar"/>
         <activity
+
             android:name=".MainActivity"
             android:theme="@style/Theme.MovieMade.NoActionBar">
             <intent-filter>

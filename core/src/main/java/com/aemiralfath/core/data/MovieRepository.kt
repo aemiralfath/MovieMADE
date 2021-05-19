@@ -8,6 +8,7 @@ import com.aemiralfath.core.domain.model.Movie
 import com.aemiralfath.core.domain.repository.IMovieRepository
 import com.aemiralfath.core.utils.AppExecutors
 import com.aemiralfath.core.utils.DataMapper
+import com.aemiralfath.core.utils.SortUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -16,10 +17,12 @@ class MovieRepository(
     private val localDataSource: LocalDataSource,
     private val appExecutors: AppExecutors
 ) : IMovieRepository {
-    override fun getAllMovies(): Flow<Resource<List<Movie>>> =
+    override fun getAllMovies(sort: String, query: String): Flow<Resource<List<Movie>>> =
         object : NetworkBoundResource<List<Movie>, List<MovieResponse>>() {
             override fun loadFromDB(): Flow<List<Movie>> {
-                return localDataSource.getAllMovies().map { DataMapper.mapEntitiesToDomain(it) }
+                val sortType = SortUtils.getSortedQuery(query, sort)
+                return localDataSource.getMovieQuery(sortType)
+                    .map { DataMapper.mapEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: List<Movie>?): Boolean =

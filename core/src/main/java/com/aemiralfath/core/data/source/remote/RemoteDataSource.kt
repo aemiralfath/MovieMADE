@@ -17,7 +17,7 @@ class RemoteDataSource(private val apiService: ApiService) {
     suspend fun getAllMovie(): Flow<ApiResponse<List<MovieResponse>>> {
         return flow {
             try {
-                val response = apiService.getListMovie(TMDB_API_KEY)
+                val response = apiService.getListMovie(token)
                 val dataArray = response.results
 
                 if (dataArray.isNotEmpty()) {
@@ -31,5 +31,4 @@ class RemoteDataSource(private val apiService: ApiService) {
             }
         }.flowOn(Dispatchers.IO)
     }
-
 }

@@ -1,6 +1,7 @@
 package com.aemiralfath.core.di
 
 import androidx.room.Room
+import com.aemiralfath.core.BuildConfig
 import com.aemiralfath.core.data.MovieRepository
 import com.aemiralfath.core.data.source.local.LocalDataSource
 import com.aemiralfath.core.data.source.local.room.MovieDatabase
@@ -28,11 +29,16 @@ val databaseModule = module {
 
 val networkModule = module {
     single {
-        OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .build()
+        if (BuildConfig.DEBUG) {
+            OkHttpClient.Builder()
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .build()
+        } else {
+            OkHttpClient()
+        }
+
     }
 
     single {

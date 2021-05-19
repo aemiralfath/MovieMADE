@@ -6,7 +6,8 @@ import com.aemiralfath.core.domain.repository.IMovieRepository
 import kotlinx.coroutines.flow.Flow
 
 class MovieInteractor(private val movieRepository: IMovieRepository) : MovieUseCase {
-    override fun getAllMovies(): Flow<Resource<List<Movie>>> = movieRepository.getAllMovies()
+    override fun getAllMovies(sort: String, query: String): Flow<Resource<List<Movie>>> =
+        movieRepository.getAllMovies(sort, query)
 
     override fun getFavoriteMovie(): Flow<List<Movie>> = movieRepository.getFavoriteMovie()
 

@@ -41,7 +41,7 @@
 
     <include
         android:id="@+id/content"
-        layout="@layout/content_detail_tourism" />
+        layout="@layout/content_detail_movie" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -91,9 +91,15 @@ class HomeFragment : Fragment() {
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        binding.rvMovie.visibility = View.GONE
-                        binding.progressBar.visibility = View.VISIBLE
-                        return true
+                        return if (!newText.isNullOrBlank()) {
+                            binding.rvMovie.visibility = View.GONE
+                            binding.progressBar.visibility = View.VISIBLE
+                            true
+                        } else {
+                            onQueryTextSubmit("")
+                            true
+                        }
+
                     }
                 })
 

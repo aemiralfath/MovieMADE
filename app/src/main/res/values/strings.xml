@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">MovieMade</string>
+    <string name="app_name">Movie Made</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="something_wrong">Oops.. something wrong</string>
 </resources>

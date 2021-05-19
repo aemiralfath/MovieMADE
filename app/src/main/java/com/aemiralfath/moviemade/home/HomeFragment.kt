@@ -14,6 +14,7 @@ import android.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aemiralfath.core.data.Resource
 import com.aemiralfath.core.domain.model.Movie
@@ -31,11 +32,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private var querySearch: String = ""
-    private var sortType: String = SortUtils.NEWEST
-
     private lateinit var movieAdapter: MovieAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +46,13 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
+
+            val pref = PreferenceManager.getDefaultSharedPreferences(context)
+
+            var querySearch = ""
+            val sortType: String =
+                pref.getString(resources.getString(R.string.sort), SortUtils.NEWEST)
+                    ?: SortUtils.NEWEST
 
             movieAdapter = MovieAdapter()
             movieAdapter.onItemClick = {
@@ -87,10 +91,8 @@ class HomeFragment : Fragment() {
                     }
 
                     override fun onQueryTextChange(newText: String?): Boolean {
-                        newText?.let {
-                            homeViewModel.setMovies(sortType, it)
-                                .observe(viewLifecycleOwner, movieObserver)
-                        }
+                        binding.rvMovie.visibility = View.GONE
+                        binding.progressBar.visibility = View.VISIBLE
                         return true
                     }
                 })
@@ -119,6 +121,7 @@ class HomeFragment : Fragment() {
             when (it) {
                 is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
                 is Resource.Success -> {
+                    binding.rvMovie.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.GONE
                     movieAdapter.setData(it.data)
                     binding.viewEmpty.root.visibility =

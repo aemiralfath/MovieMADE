@@ -7,6 +7,9 @@ import kotlinx.coroutines.flow.Flow
 
 class LocalDataSource(private val movieDao: MovieDao) {
 
+    fun getMovieQuery(query: SupportSQLiteQuery): Flow<List<MovieEntity>> =
+        movieDao.getMovieQuery(query)
+
     fun getFavoriteMovie(): Flow<List<MovieEntity>> = movieDao.getFavoriteMovie()
 
     suspend fun insertMovie(movieList: List<MovieEntity>) = movieDao.insertMovie(movieList)
@@ -15,8 +18,5 @@ class LocalDataSource(private val movieDao: MovieDao) {
         movie.isFavorite = newState
         movieDao.updateFavoriteMovie(movie)
     }
-
-    fun getMovieQuery(query: SupportSQLiteQuery): Flow<List<MovieEntity>> =
-        movieDao.getMovieQuery(query)
 
 }

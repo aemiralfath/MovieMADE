@@ -3,8 +3,8 @@ package com.aemiralfath.core.utils
 import androidx.sqlite.db.SimpleSQLiteQuery
 
 object SortUtils {
-    const val NEWEST = "Newest"
-    const val OLDEST = "Oldest"
+    const val NEWEST = "NEWEST"
+    const val OLDEST = "OLDEST"
     const val CHARACTER = "CHARACTER"
 
     fun getSortedQuery(query: String, filter: String): SimpleSQLiteQuery {

@@ -10,6 +10,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.aemiralfath.moviemade.databinding.ActivityMainBinding
 import com.aemiralfath.moviemade.home.HomeFragment
+import com.aemiralfath.moviemade.settings.SettingsFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -53,6 +54,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> {
                 fragment = HomeFragment()
                 title = getString(R.string.app_name)
+            }
+            R.id.nav_settings -> {
+                fragment = SettingsFragment()
+                title = getString(R.string.menu_settings)
             }
             R.id.nav_favorite -> {
                 val uri = Uri.parse("moviesapp://favorite")

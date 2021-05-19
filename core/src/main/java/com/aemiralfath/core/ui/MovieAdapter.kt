@@ -8,6 +8,7 @@ import com.aemiralfath.core.R
 import com.aemiralfath.core.databinding.ItemListMovieBinding
 import com.aemiralfath.core.domain.model.Movie
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
 
@@ -41,7 +42,12 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.ListViewHolder>() {
             with(binding) {
                 Glide.with(itemView.context)
                     .load("https://image.tmdb.org/t/p/w780${data.backdropPath}")
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
                     .into(ivItemImage)
+
                 tvItemTitle.text = data.title
                 tvItemSubtitle.text = data.overview
             }

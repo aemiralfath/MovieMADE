@@ -37,4 +37,5 @@
     <string name="vote_count">Vote Count</string>
     <string name="share_movie">Share this movie now</string>
     <string name="share_text">Watch %s now with me!</string>
+    <string name="splashscreen_image">Splashscreen Image</string>
 </resources>

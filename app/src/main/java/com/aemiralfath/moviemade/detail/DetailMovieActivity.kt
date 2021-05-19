@@ -69,8 +69,6 @@ class DetailMovieActivity : AppCompatActivity() {
                         .startChooser()
                 }
             }
-
-
         }
     }
 

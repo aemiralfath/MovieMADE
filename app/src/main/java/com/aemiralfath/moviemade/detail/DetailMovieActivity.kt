@@ -36,6 +36,15 @@ class DetailMovieActivity : AppCompatActivity() {
             supportActionBar?.title = detailMovie.title
 
             with(binding) {
+                content.tvOverview.text = detailMovie.overview
+                content.tvMovieLanguage.text = detailMovie.originalLanguage
+                content.tvMoviePopularity.text = detailMovie.popularity.toString()
+                content.tvMovieVote.text = detailMovie.voteCount.toString()
+                content.tvMovieAdult.text =
+                    if (detailMovie.adult) resources.getString(R.string.yes) else resources.getString(
+                        R.string.no
+                    )
+
                 Glide.with(this@DetailMovieActivity)
                     .load("https://image.tmdb.org/t/p/w780${detailMovie.backdropPath}")
                     .apply(
@@ -43,8 +52,6 @@ class DetailMovieActivity : AppCompatActivity() {
                             .error(R.drawable.ic_error)
                     )
                     .into(ivDetailImage)
-
-                content.tvOverview.text = detailMovie.overview
 
                 var statusFavorite = detailMovie.isFavorite
                 setStatusFavorite(statusFavorite)
@@ -54,11 +61,6 @@ class DetailMovieActivity : AppCompatActivity() {
                     detailMovieViewModel.setFavoriteMovie(detailMovie, statusFavorite)
                     setStatusFavorite(statusFavorite)
                 }
-
-                content.tvMovieAdult.text = if (detailMovie.adult) "Yes" else "No"
-                content.tvMovieLanguage.text = detailMovie.originalLanguage
-                content.tvMoviePopularity.text = detailMovie.popularity.toString()
-                content.tvMovieVote.text = detailMovie.voteCount.toString()
 
                 content.btnMovieShare.setOnClickListener {
                     ShareCompat.IntentBuilder

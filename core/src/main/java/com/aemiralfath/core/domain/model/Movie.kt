@@ -1,7 +1,7 @@
 package com.aemiralfath.core.domain.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Movie(
@@ -9,11 +9,9 @@ data class Movie(
     val title: String,
     val overview: String,
     val originalLanguage: String,
-    val posterPath: String,
     val backdropPath: String,
     val releaseDate: String,
     val popularity: Double,
-    val voteAverage: Double,
     val adult: Boolean,
     val voteCount: Int,
     val isFavorite: Boolean

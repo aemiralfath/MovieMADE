@@ -3,9 +3,10 @@ package com.aemiralfath.core.utils
 import androidx.sqlite.db.SimpleSQLiteQuery
 
 object SortUtils {
+
     const val NEWEST = "NEWEST"
-    const val OLDEST = "OLDEST"
-    const val CHARACTER = "CHARACTER"
+    private const val OLDEST = "OLDEST"
+    private const val CHARACTER = "CHARACTER"
 
     fun getSortedQuery(query: String, filter: String): SimpleSQLiteQuery {
         val simpleQuery = StringBuilder().append("SELECT * FROM movie ")

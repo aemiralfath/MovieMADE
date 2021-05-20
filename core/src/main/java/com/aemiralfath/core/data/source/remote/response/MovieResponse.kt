@@ -12,9 +12,6 @@ data class MovieResponse(
     @field:SerializedName("title")
     val title: String,
 
-    @field:SerializedName("poster_path")
-    val posterPath: String,
-
     @field:SerializedName("backdrop_path")
     val backdropPath: String,
 
@@ -23,9 +20,6 @@ data class MovieResponse(
 
     @field:SerializedName("popularity")
     val popularity: Double,
-
-    @field:SerializedName("vote_average")
-    val voteAverage: Double,
 
     @field:SerializedName("id")
     val id: Int,

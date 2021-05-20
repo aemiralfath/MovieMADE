@@ -1,5 +1,4 @@
 <resources>
-    <!-- Reply Preference -->
     <string-array name="sort_entries">
         <item>Newest</item>
         <item>Oldest</item>

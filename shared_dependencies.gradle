@@ -7,6 +7,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$androidx_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     implementation "androidx.multidex:multidex:$multidex_version"
+    implementation "androidx.preference:preference-ktx:$preference_ktx_version"
 
     implementation "androidx.cardview:cardview:$cardview_version"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"

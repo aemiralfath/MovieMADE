@@ -24,9 +24,6 @@ data class MovieEntity(
     @ColumnInfo(name = "originalLanguage")
     var originalLanguage: String,
 
-    @ColumnInfo(name = "posterPath")
-    var posterPath: String,
-
     @ColumnInfo(name = "backdropPath")
     var backdropPath: String,
 
@@ -35,9 +32,6 @@ data class MovieEntity(
 
     @ColumnInfo(name = "popularity")
     var popularity: Double,
-
-    @ColumnInfo(name = "voteAverage")
-    var voteAverage: Double,
 
     @ColumnInfo(name = "adult")
     var adult: Boolean,

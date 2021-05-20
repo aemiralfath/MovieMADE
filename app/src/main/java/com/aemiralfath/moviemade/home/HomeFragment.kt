@@ -47,13 +47,6 @@ class HomeFragment : Fragment() {
 
         if (activity != null) {
 
-            val pref = PreferenceManager.getDefaultSharedPreferences(context)
-
-            var querySearch = ""
-            val sortType: String =
-                pref.getString(resources.getString(R.string.sort), SortUtils.NEWEST)
-                    ?: SortUtils.NEWEST
-
             movieAdapter = MovieAdapter()
             movieAdapter.onItemClick = {
                 val intent = Intent(activity, DetailMovieActivity::class.java)
@@ -61,84 +54,93 @@ class HomeFragment : Fragment() {
                 startActivity(intent)
             }
 
-            val searchManager =
-                requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
-
-            homeViewModel.setMovies(sortType, querySearch)
-                .observe(viewLifecycleOwner, movieObserver)
-
-            with(binding) {
-                rvMovie.layoutManager = LinearLayoutManager(context)
-                rvMovie.setHasFixedSize(true)
-                rvMovie.adapter = movieAdapter
-
-                svMovie.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
-                svMovie.isActivated = true
-                svMovie.queryHint = resources.getString(R.string.search_movie)
-                svMovie.onActionViewExpanded()
-                svMovie.isIconified = false
-                svMovie.clearFocus()
-
-                svMovie.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                    override fun onQueryTextSubmit(query: String?): Boolean {
-                        query?.let {
-                            homeViewModel.setMovies(sortType, it)
-                                .observe(viewLifecycleOwner, movieObserver)
-                            querySearch = it
-                        }
-                        requireActivity().hideSoftKeyboard()
-                        return true
-                    }
-
-                    override fun onQueryTextChange(newText: String?): Boolean {
-                        return if (!newText.isNullOrBlank()) {
-                            binding.rvMovie.visibility = View.GONE
-                            binding.progressBar.visibility = View.VISIBLE
-                            true
-                        } else {
-                            onQueryTextSubmit("")
-                            true
-                        }
-
-                    }
-                })
-
-                val idBtn = svMovie.context.resources.getIdentifier(
-                    "android:id/search_close_btn",
-                    null,
-                    null
-                )
-                val closeButton = svMovie.findViewById<ImageView>(idBtn)
-
-                closeButton.setOnClickListener {
-                    querySearch = ""
-                    homeViewModel.setMovies(sortType, querySearch)
-                        .observe(viewLifecycleOwner, movieObserver)
-                    svMovie.setQuery("", false)
-                    requireActivity().hideSoftKeyboard()
-                }
-            }
-
+            populateView()
         }
     }
 
     private val movieObserver = Observer<Resource<List<Movie>>> {
         if (it != null) {
             when (it) {
-                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                is Resource.Loading -> showLoading(true)
                 is Resource.Success -> {
-                    binding.rvMovie.visibility = View.VISIBLE
-                    binding.progressBar.visibility = View.GONE
+                    showLoading(false)
                     movieAdapter.setData(it.data)
                     binding.viewEmpty.root.visibility =
                         if (it.data?.isNotEmpty() == true) View.GONE else View.VISIBLE
                 }
                 is Resource.Error -> {
-                    binding.progressBar.visibility = View.GONE
-                    binding.viewError.root.visibility = View.VISIBLE
+                    showLoading(false)
                     binding.viewError.tvError.text =
                         it.message ?: getString(R.string.something_wrong)
                 }
+            }
+        }
+    }
+
+
+    private fun populateView() {
+        val searchManager =
+            requireActivity().getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
+        val pref = PreferenceManager.getDefaultSharedPreferences(context)
+
+        var querySearch = ""
+        val sortType: String =
+            pref.getString(resources.getString(R.string.sort), SortUtils.NEWEST)
+                ?: SortUtils.NEWEST
+
+        homeViewModel.setMovies(sortType, querySearch)
+            .observe(viewLifecycleOwner, movieObserver)
+
+        with(binding) {
+            rvMovie.layoutManager = LinearLayoutManager(context)
+            rvMovie.setHasFixedSize(true)
+            rvMovie.adapter = movieAdapter
+
+            svMovie.setSearchableInfo(searchManager.getSearchableInfo(requireActivity().componentName))
+            svMovie.isActivated = true
+            svMovie.queryHint = resources.getString(R.string.search_movie)
+            svMovie.onActionViewExpanded()
+            svMovie.isIconified = false
+            svMovie.clearFocus()
+
+            svMovie.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    query?.let {
+                        homeViewModel.setMovies(sortType, it)
+                            .observe(viewLifecycleOwner, movieObserver)
+                        querySearch = it
+                    }
+                    requireActivity().hideSoftKeyboard()
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    return if (!newText.isNullOrBlank()) {
+                        binding.rvMovie.visibility = View.GONE
+                        binding.progressBar.visibility = View.VISIBLE
+                        true
+                    } else {
+                        onQueryTextSubmit("")
+                        true
+                    }
+
+                }
+            })
+
+            val idBtn = svMovie.context.resources.getIdentifier(
+                "android:id/search_close_btn",
+                null,
+                null
+            )
+            val closeButton = svMovie.findViewById<ImageView>(idBtn)
+
+            closeButton.setOnClickListener {
+                querySearch = ""
+                homeViewModel.setMovies(sortType, querySearch)
+                    .observe(viewLifecycleOwner, movieObserver)
+                svMovie.setQuery("", false)
+                requireActivity().hideSoftKeyboard()
             }
         }
     }
@@ -149,6 +151,17 @@ class HomeFragment : Fragment() {
                 ContextCompat.getSystemService(this, InputMethodManager::class.java)!!
             inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.rvMovie.visibility = View.GONE
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.rvMovie.visibility = View.VISIBLE
+            binding.progressBar.visibility = View.GONE
+        }
+
     }
 
     override fun onDestroy() {

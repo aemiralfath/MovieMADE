@@ -148,8 +148,8 @@ class HomeFragment : Fragment() {
     private fun Activity.hideSoftKeyboard() {
         currentFocus?.let {
             val inputMethodManager =
-                ContextCompat.getSystemService(this, InputMethodManager::class.java)!!
-            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
+                ContextCompat.getSystemService(this, InputMethodManager::class.java)
+            inputMethodManager?.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 

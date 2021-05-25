@@ -32,7 +32,7 @@ class FavoriteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        favoriteViewModel.movie.observe(this, {
+        favoriteViewModel.setFavorite().observe(this, {
             movieAdapter.setData(it)
             binding.viewEmpty.root.visibility =
                 if (it.isNotEmpty()) View.GONE else View.VISIBLE

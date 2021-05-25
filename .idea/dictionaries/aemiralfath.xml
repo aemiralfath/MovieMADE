@@ -2,10 +2,15 @@
   <dictionary name="aemiralfath">
     <words>
       <w>aemiralfath</w>
+      <w>appname</w>
+      <w>dorg</w>
+      <w>endlocal</w>
+      <w>errorlevel</w>
       <w>interactor</w>
       <w>koin</w>
       <w>moviemade</w>
       <w>moviesapp</w>
+      <w>setlocal</w>
     </words>
   </dictionary>
 </component>

@@ -9,7 +9,7 @@ import com.aemiralfath.moviemade.R
 import com.aemiralfath.moviemade.databinding.ActivityDetailMovieBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailMovieActivity : AppCompatActivity() {
 

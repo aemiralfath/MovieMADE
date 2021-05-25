@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aemiralfath.core.ui.MovieAdapter
 import com.aemiralfath.favorite.databinding.ActivityFavoriteBinding
 import com.aemiralfath.moviemade.detail.DetailMovieActivity
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 
 class FavoriteActivity : AppCompatActivity() {

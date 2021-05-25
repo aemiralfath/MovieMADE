@@ -1,0 +1,18 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:title="@string/sort">
+
+        <ListPreference
+            app:defaultValue="NEWEST"
+            app:entries="@array/sort_entries"
+            app:entryValues="@array/sort_values"
+            app:iconSpaceReserved="false"
+            app:key="@string/sort"
+            app:title="@string/sort_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

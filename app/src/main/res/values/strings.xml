@@ -1,3 +1,29 @@
 <resources>
-    <string name="app_name">MovieMade</string>
+    <string name="app_name">Movie Made</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="something_wrong">Oops.. something wrong</string>
+    <string name="title_activity_detail_home">DetailHomeActivity</string>
+    <string name="title_favorite">Favorite</string>
+    <string name="no_data">Empty data</string>
+    <string name="search_movie">Search Movie</string>
+
+    <string name="menu_settings">Settings</string>
+    <string name="sort">Sort</string>
+    <string name="sort_title">Sort movie by</string>
+    <string name="not_found">Movie not found</string>
+    <string name="overview">Overview</string>
+    <string name="detail">Detail</string>
+    <string name="share">Share</string>
+    <string name="adult">Adult</string>
+    <string name="language">Language</string>
+    <string name="popularity">Popularity</string>
+    <string name="vote_count">Vote Count</string>
+    <string name="share_movie">Share this movie now</string>
+    <string name="share_text">Watch %s now with me!</string>
+    <string name="splashscreen_image">Splashscreen Image</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

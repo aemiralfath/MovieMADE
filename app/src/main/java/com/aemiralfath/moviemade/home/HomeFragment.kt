@@ -23,7 +23,7 @@ import com.aemiralfath.core.utils.SortUtils
 import com.aemiralfath.moviemade.R
 import com.aemiralfath.moviemade.databinding.FragmentHomeBinding
 import com.aemiralfath.moviemade.detail.DetailMovieActivity
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : Fragment() {
 

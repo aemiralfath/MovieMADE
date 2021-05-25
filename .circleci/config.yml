@@ -5,6 +5,7 @@ version: 2.1
 # Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
 orbs:
   android: circleci/android@1.0.3
+  vulnachecka: whitesource/vulnerability-checker@19.5.5
 
 jobs:
   build:
@@ -38,3 +39,4 @@ jobs:
       - store_artifacts:  
           path: app/build/outputs/apk/debug/
           destination: artifact-file
+      - vulnachecka/scan
